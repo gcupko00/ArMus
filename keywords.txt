@@ -1,0 +1,6 @@
+ArMus	KEYWORD1
+playMelody	KEYWORD2
+setTempo	KEYWORD2
+clockAlarm	KEYWORD2
+ring	KEYWORD2
+siren	KEYWORD2
