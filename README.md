@@ -1,6 +1,6 @@
 # ArMus
 
-ArMus (Arduino Music) is a sipmle library which provides basic functions for playing music on piezoelectric speaker connected to Arduino. ArMus is still in development and possibly unstable.
+ArMus (Arduino Music) is a simple library which provides basic functions for playing music on piezoelectric speaker connected to Arduino. ArMus is still in development and possibly unstable.
 
 ## Functions
 
