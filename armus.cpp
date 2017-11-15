@@ -3,25 +3,20 @@
 
 const char ArMus::notes[] = { 'A', 'b', 'B', 'C',  'd', 'D', 'e', 'E', 'F', 'g', 'G', 'a'};
 
-ArMus::ArMus() { }
+ArMus::ArMus(): _buzzer(10), _tempo(120) { }
 
-ArMus::ArMus(int buzzerPin) {
-    _buzzer = buzzerPin;    
-}
+ArMus::ArMus(int buzzerPin): _buzzer(buzzerPin), _tempo(120) { }
 
-ArMus::ArMus(int buzzerPin, int tempo) {
-    _buzzer = buzzerPin;
-    _tempo = tempo;
-}
+ArMus::ArMus(int buzzerPin, int tempo) : _buzzer(buzzerPin), _tempo(tempo) { }
 
 void ArMus::setTempo(int tempo) {
     _tempo = tempo;
 }
-        
+
 void ArMus::playMelody(char mStr[]) {
     int o; 
     char n;
-    int v; 
+    float v; 
     bool stacc;
     
     char buff[16];
@@ -97,13 +92,13 @@ void ArMus::siren(int limit1, int limit2, int duration) {
     }
 }
 
-bool ArMus::parseNote(char nStr[], int& o, char& n, int& v, bool& stacc) {
+bool ArMus::parseNote(char nStr[], int& o, char& n, float& v, bool& stacc) {
     int i = 0;
     char buff[16];
 
     // defaults
     o = 0;
-    v = 4;
+    v = 4.0;
     stacc = false;
     
     buff[0]  = '\0';
@@ -127,7 +122,6 @@ bool ArMus::parseNote(char nStr[], int& o, char& n, int& v, bool& stacc) {
     n = nStr[i];
     ++i;
 
-    
     // stop if note name is invalid
     if (!isNote(n)) {
         return false;
@@ -136,11 +130,11 @@ bool ArMus::parseNote(char nStr[], int& o, char& n, int& v, bool& stacc) {
     // parse note value
     if (isDigit(nStr[i])) {
         int j = 0;
-        while (i < strlen(nStr) && isDigit(nStr[i])) {
+        while (i < strlen(nStr) && (isDigit(nStr[i]) || nStr[i] == '.')) {
             buff[j++] = nStr[i++];
             buff[j] = '\0';
         }
-        v = atoi(buff);
+        v = atof(buff);
     }
 
     // parse staccato
@@ -155,7 +149,7 @@ bool ArMus::parseNote(char nStr[], int& o, char& n, int& v, bool& stacc) {
     return true;
 }
 
-bool ArMus::parseRest(char rStr[], int& v) {
+bool ArMus::parseRest(char rStr[], float& v) {
     int i = 1;
     char buff[16];
 
@@ -165,11 +159,11 @@ bool ArMus::parseRest(char rStr[], int& v) {
     if (isDigit(rStr[i])) {
         // parse rest value
         int j = 0;
-        while (i < strlen(rStr) && isDigit(rStr[i])) {
+        while (i < strlen(rStr) && (isDigit(rStr[i]) || rStr[i] == '.')) {
             buff[j++] = rStr[i++];
             buff[j] = '\0';
         }
-        v = atoi(buff);
+        v = atof(buff);
     }
     else {
         return false;
@@ -182,7 +176,7 @@ bool ArMus::parseRest(char rStr[], int& v) {
     return true;
 }
 
-void ArMus::note(char n, int o, int v, bool stacc) {  
+void ArMus::note(char n, int o, float v, bool stacc) {  
     float f = f0;
     float s = 0;
 
@@ -203,7 +197,7 @@ void ArMus::note(char n, int o, int v, bool stacc) {
     f = f * pow(pow(2.0, 1.0/12.0), s);
 
     // Calculate note duration based on tempo and note value
-    int d = 4 * (60000 / _tempo) / v;
+    int d = 4.0 * (60000.0 / _tempo) / v;
 
     // Play note on buzzer
     tone(_buzzer, f);
@@ -222,16 +216,16 @@ void ArMus::note(char n, int o, int v, bool stacc) {
     } 
 }
 
-void ArMus::rest(int v) {
-    int d = 4 * (60000 / _tempo) / v;
+void ArMus::rest(float v) {
+    int d = 4.0 * (60000.0 / _tempo) / v;
     noTone(_buzzer);
     delay(d);    
 }
 
-bool ArMus::isNoteValid(char n, int o, int v) {
+bool ArMus::isNoteValid(char n, int o, float v) {
     if (!isNote(n)) return false;
     if (o < minOctave || o > maxOctave) return false;
-    if (v < 1) return false;
+    if (v < 1.0) return false;
     return true;
 }
 

@@ -66,8 +66,8 @@ class ArMus
         void siren(int limit1 = 500, int limit2 = 700, int duration = 1000);
         
     private:
-        int _buzzer = 10;
-        float _tempo = 120.0;
+        int _buzzer;
+        float _tempo;
         static const char notes[];
         const int minOctave = -3;
         const int maxOctave = 3;
@@ -84,7 +84,7 @@ class ArMus
          * 
          * @return true if successfully parsed, false if not 
          */
-        bool parseNote(char nStr[], int& o, char& n, int& v, bool& stacc);
+        bool parseNote(char nStr[], int& o, char& n, float& v, bool& stacc);
         
         /**
          * Parses rest value
@@ -93,7 +93,7 @@ class ArMus
          * @param v - variable used to store rest value
          * @returns true if rest string is successfully parsed and valid, false otherwise
          */
-        bool parseRest(char rStr[], int& v);
+        bool parseRest(char rStr[], float& v);
         
         /**
          * Validates and plays note on buzzer
@@ -103,14 +103,14 @@ class ArMus
          * @param v - note value (relative value is calculated as 1/l)
          * @param stacc - tells if note should be played as staccato (50% of note value)
          */
-        void note(char n, int o = 0, int v = 4, bool stacc = false);
+        void note(char n, int o = 0, float v = 4, bool stacc = false);
         
         /**
          * Sets no tone on buzzer
          * 
          * @param v - rest value
          */
-        void rest(int v);
+        void rest(float v);
         
         /**
          * Checks if note is valid
@@ -120,7 +120,7 @@ class ArMus
          * @param v - note value
          * @return true if note satisfies validity criteria, false otherwise
          */
-        bool isNoteValid(char n, int o, int v);
+        bool isNoteValid(char n, int o, float v);
         
         /**
          * Cheks if note name is correct
