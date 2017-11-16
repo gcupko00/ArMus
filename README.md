@@ -6,11 +6,11 @@ ArMus (Arduino Music) is a simple library which provides basic functions for pla
 
 Currently supported functionalities:
 
-* Parsing string which represents melody and reproducing that melody on the piezo speaker
+* Parsing string which represents a melody and reproducing it on the piezo speaker
 * Changing tempo
-* Playing few common sounds and simple effects: beeping alarm, ringing and siren.
+* Playing few common sounds and simple effects: beeping alarm, ringing and siren
 
-More features are comming soon.
+More features comming soon.
 
 ## Usage
 
@@ -30,13 +30,13 @@ ArMus provides `playMelody` function which takes string as an argument. String c
 
 Only note name is required, all other parts are optional.
 
-Note names must be in the set of notes: { 'A', 'b', 'B', 'C',  'd', 'D', 'e', 'E', 'F', 'g', 'G', 'a'}. Base note A represents 440 Hz frequency.
+Note names must be in the set of notes: { A, b, B, C, d, D, e, E, F, g, G, a }. Base note A represents 440 Hz frequency.
 
 Relative octave tells how many octaves is the note distanced from the octave of base note A. It must be a number between -3 and 3. Default relative octave is 0.
 
 Note value specifies the length of note. For example, value of 2 means that the note is half note. Default value is quarter note.
 
-Staccato is a boolean which tell if note should be played as a staccato (only half of its value is played). By default, note is not staccato note.
+Staccato is a boolean which tell if note should be played as a staccato (only half of its value is played). By default, note is not staccato note. To turn it into staccato, add asterisk after note (e.g. `1E8*`).
 
 Rests are writen in format `R<value>` or `r<value>`. Rest value is basically the same as note value - it specifies how long the rest is.
 
