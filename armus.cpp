@@ -1,3 +1,23 @@
+/* Arduino Music Library
+ * https://github.com/gcupko00/ArMus
+ * Copyright (c) 2017 Gligorije Cupkovic
+ * 
+ * This file is part of ArMus.
+ *
+ * ArMus is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ArMus is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with ArMus. If not, see <http://www.gnu.org/licenses/>.
+ */
+ 
 #include "Arduino.h"
 #include "armus.h"
 
@@ -90,6 +110,8 @@ void ArMus::siren(int limit1, int limit2, int duration) {
             delay(d);
         }    
     }
+    
+    noTone(_buzzer);
 }
 
 bool ArMus::parseNote(char nStr[], int& o, char& n, float& v, bool& stacc) {
