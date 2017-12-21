@@ -14,6 +14,12 @@ More features comming soon.
 
 ## Usage
 
+The default configuration consists of piezo speaker connected to Arduino's digital pin 10 as shown on the following illustrations.
+
+![Default configuration](assets/default_conf.jpg?raw=true "Default configuration")
+
+![Default configuration schematic](assets/default_conf_schem.jpg?raw=true "Default configuration schematic")
+
 Three constructors are available:
 
 * `ArMus()` - default constructor.
