@@ -16,9 +16,8 @@ More features comming soon.
 
 The default configuration consists of piezo speaker connected to Arduino's digital pin 10 as shown on the following illustrations.
 
-![Default configuration](assets/default_conf.jpg?raw=true "Default configuration")
-
-![Default configuration schematic](assets/default_conf_schem.jpg?raw=true "Default configuration schematic")
+<img src=assets/default_conf.jpg width="350"/>
+<img src=assets/default_conf_schem.jpg width="350"/>
 
 Three constructors are available:
 
